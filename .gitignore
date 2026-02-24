@@ -1,0 +1,29 @@
+﻿# Byte-compiled
+__pycache__/
+*.py[cod]
+*.class
+
+# Environment
+.env
+venv/
+.venv/
+
+# Exports
+exports/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# AI / conversation history
+.specstory/
+
+# Images (not part of the project)
+*.png
+*.jpg
+*.jpeg
+*.gif

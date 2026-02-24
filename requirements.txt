@@ -1,0 +1,7 @@
+discord.py==2.3.2
+python-dotenv==1.0.1
+fpdf2==2.7.9
+rich==13.7.1
+aiofiles==23.2.1
+python-dateutil==2.9.0
+aiohttp>=3.9.0
