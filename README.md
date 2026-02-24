@@ -123,9 +123,9 @@ Python is the programming language this tool is written in. You need it installe
    - **Mac:** Open "Terminal" from Spotlight (`Cmd + Space`, type "Terminal")
    - **Linux:** Open your terminal application
 2. **Type this and press Enter:**
-   triplebacktick
+   ```
    python --version
-   triplebacktick
+   ```
 3. If you see something like `Python 3.10.x` or higher, you're good — **skip to [Step 2](#-step-2--download-this-project)!**
 4. If you see an error like `'python' is not recognized`, you need to install it.
 
@@ -160,17 +160,17 @@ You have two options:
 
 1. Open your terminal
 2. Navigate to where you want to put the project:
-   triplebacktick
+   ```
    cd C:\Users\YourName\Desktop
-   triplebacktick
+   ```
 3. Clone it:
-   triplebacktick
+   ```
    git clone https://github.com/chchchadzilla/dixpord.git
-   triplebacktick
+   ```
 4. Enter the folder:
-   triplebacktick
+   ```
    cd Dixpord
-   triplebacktick
+   ```
 
 > Don't have Git? Download it from **<https://git-scm.com/downloads>** or just use Option A.
 
@@ -202,9 +202,9 @@ Your **user token** is what Discord uses internally to authenticate you. Using i
 9. **Copy that value** — that's your Discord user token
 
 > 💡 **Alternative method:** In Developer Tools, go to the **"Console"** tab and paste this:
-> triplebacktick js
+> ``` js
 > (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()
-> triplebacktick
+> ```
 > Press Enter — your token will be printed.
 
 ### ⚠️ Security Warnings
@@ -295,14 +295,14 @@ The `.env` file is where you put your token and settings.
 
 1. Open the `.env` file in a text editor (Notepad, VS Code, etc.)
 2. **For user mode (recommended):** Find this line:
-   triplebacktick
+   ```
    DISCORD_USER_TOKEN=YOUR_USER_TOKEN_HERE
-   triplebacktick
+   ```
    Replace `YOUR_USER_TOKEN_HERE` with the token you copied in Step 3.
 3. **For bot mode (alternative):** Find this line:
-   triplebacktick
+   ```
    DISCORD_BOT_TOKEN=YOUR_BOT_TOKEN_HERE
-   triplebacktick
+   ```
    Replace `YOUR_BOT_TOKEN_HERE` with your bot token from Step 3 Alt.
 4. ⚠️ **No quotes. No spaces around the `=`. Just paste the token directly.**
 5. **Save the file** (`Ctrl+S` on Windows, `Cmd+S` on Mac)
@@ -353,25 +353,25 @@ This keeps Dixpord's packages separate from your system. It's optional but recom
 
 **Windows:**
 
-triplebacktick
+```
 python -m venv venv
 venv\Scripts\activate
-triplebacktick
+```
 
 **Mac / Linux:**
 
-triplebacktick
+```
 python3 -m venv venv
 source venv/bin/activate
-triplebacktick
+```
 
 After activating, you should see `(venv)` at the beginning of your terminal line. This means it's working.
 
 ### 5c. Install the packages
 
-triplebacktick
+```
 pip install -r requirements.txt
-triplebacktick
+```
 
 > **Mac users:** If `pip` doesn't work, try `pip3` instead.
 
@@ -385,15 +385,15 @@ You'll see a bunch of text scroll by as it downloads. When it's done and you see
 
 Make sure your terminal is in the Dixpord folder (and your virtual environment is activated if you created one).
 
-triplebacktick
+```
 python run.py
-triplebacktick
+```
 
 > **Mac users:** Use `python3 run.py` if `python` doesn't work.
 
 **If you have both tokens set**, you'll see a mode selection first:
 
-triplebacktick
+```
 ╭──────────────────────────────────────────────────────────╮
 │  Dixpord — Discord Log Exporter                          │
 │  Export your Discord messages from DMs, servers &         │
@@ -405,11 +405,11 @@ triplebacktick
     [2]  Bot mode   (limited — only servers the bot is invited to)
 
   Enter 1 or 2 [1]:
-triplebacktick
+```
 
 **If you only have a user token**, it goes straight to user mode:
 
-triplebacktick
+```
 ✅ Connected as YourName#1234 (ID: 123456789012345678)
 
  Main Menu
@@ -420,7 +420,7 @@ triplebacktick
   5   List your servers
   6   List your DMs
   0   Quit
-triplebacktick
+```
 
 🎉 **You're in!** Read the next section to learn how to use it.
 
@@ -505,7 +505,7 @@ When the tool asks **"Filter by username"**, type `multi` to enter **multi-user 
 
 > *I want all messages from alice (any date), but only messages from bob after 2024-06-01.*
 
-triplebacktick
+```
 Filter by username (or "multi" for multi-user): multi
   Username #1 (Enter to finish): alice
     Start date for alice (Enter=use global):    ← press Enter
@@ -514,7 +514,7 @@ Filter by username (or "multi" for multi-user): multi
     Start date for bob (Enter=use global): 2024-06-01
     End date for bob (Enter=use global):        ← press Enter
   Username #3 (Enter to finish):                ← press Enter to finish
-triplebacktick
+```
 
 This exports all messages from **alice** (using the global date range) plus messages from **bob** only after June 1, 2024.
 
@@ -536,13 +536,13 @@ All three formats include: message content, author names, timestamps, attachment
 
 By default, all exports are saved in the `exports/` folder inside the Dixpord project folder:
 
-triplebacktick
+```
 Dixpord/
 └── exports/
     ├── My Server - general_20260221_143052.txt
     ├── DM with Alice_20260221_143210.md
     └── DM with Bob_20260221_143315.pdf
-triplebacktick
+```
 
 The filename includes the server/channel name and the date+time of the export, so you'll never accidentally overwrite an old export.
 
@@ -622,9 +622,9 @@ To change the save location, edit `EXPORT_DIR` in your `.env` file.
 
 **Fix:** Try this instead:
 
-triplebacktick
+```
 python -m pip install -r requirements.txt
-triplebacktick
+```
 
 ---
 
@@ -757,7 +757,7 @@ A: User tokens expire when you change your password, enable/disable 2FA, or log 
 
 Here's what every file in the project does:
 
-triplebacktick
+```
 Dixpord/
 ├── run.py                     ← Run this to start the tool
 ├── requirements.txt           ← List of Python packages needed
@@ -785,7 +785,7 @@ Dixpord/
 │       └── pdf_exporter.py    ← Writes .pdf files
 │
 └── exports/                   ← Your exported files appear here
-triplebacktick
+```
 
 ---
 
