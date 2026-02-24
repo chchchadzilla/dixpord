@@ -220,9 +220,9 @@ Your token stays valid until you change your Discord password or log out of all 
 
 ---
 
-## 🤖 Step 3 (Alt) — Create a Discord Bot (Optional)
+## 🤖 Step 3 (Alt) — Create a Discord Bot (Optional - Skip To Step 4 If You Already Have Your User Token)
 
-> **Only use this if you don't want to use your personal token.** Bot mode is more limited — bots cannot access your personal DMs.
+> **Only use this if you don't want to use your personal token.** Bot mode is more limited — bots cannot access your personal DMs - If you did the above step, go ahead and skip to step 4.
 
 ### 3a. Create a Discord Application
 
@@ -277,7 +277,7 @@ Your bot needs to be in the same servers as the messages you want to export.
 
 ## ⚙️ Step 4 — Configure the `.env` File
 
-The `.env` file is where you put your token and settings.
+The `.env` file is where you put your token and settings. It's basically a hidden file in your system.
 
 ### 4a. Create your `.env` file
 
@@ -355,8 +355,16 @@ This keeps Dixpord's packages separate from your system. It's optional but recom
 
 ```
 python -m venv venv
-venv\Scripts\activate
 ```
+then press enter
+then enter
+```
+venv\Scripts\activate.bat
+```
+then press enter. It'll go to a blank line below your cursor, and it will stay that way for about 20 seconds
+(or more if you have a potatocomputer)
+then it'll go back to where it looks like its ready to type in again (usually C:\ or D:\ or where ever you installed it)
+
 
 **Mac / Linux:**
 
@@ -365,13 +373,16 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-After activating, you should see `(venv)` at the beginning of your terminal line. This means it's working.
+After activating, you should see `(venv)` at the beginning of your terminal line. This means it's working. 
+like this: `(venv) C:\AI\DixporD\` or whatever the location you cloned the DixporD folder to.
 
 ### 5c. Install the packages
 
+enter into the scary black code box this:
 ```
 pip install -r requirements.txt
 ```
+and press enter.
 
 > **Mac users:** If `pip` doesn't work, try `pip3` instead.
 
@@ -383,11 +394,13 @@ You'll see a bunch of text scroll by as it downloads. When it's done and you see
 
 ## ▶️ Step 6 — Run the Tool
 
-Make sure your terminal is in the Dixpord folder (and your virtual environment is activated if you created one).
+Make sure your terminal is in the DixporD folder (and your virtual environment is activated if you created one).
 
+And enter this:
 ```
 python run.py
 ```
+then press enter.
 
 > **Mac users:** Use `python3 run.py` if `python` doesn't work.
 
