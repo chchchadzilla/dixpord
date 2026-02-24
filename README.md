@@ -1,9 +1,49 @@
-﻿# ðŸ“‹ Dixpord â€” Discord Log Exporter
+﻿<p align="center">
+  <img src="banner.png" alt="DixporD Banner â€” Darrel the Cybernetic Duck from the Future" width="100%">
+</p>
 
-> **Export your Discord messages from DMs, servers, and channels.**
-> Save them as `.txt`, `.md` (Markdown), or `.pdf` files â€” with powerful search and filtering built in.
+<h1 align="center">
+  <img src="icon.png" alt="DixporD Icon" width="64" height="64" style="vertical-align: middle;">
+  DixporD â€” Discord Log Exporter
+</h1>
 
-**License:** This is free, open-source software under the [MIT License](LICENSE). Use it, share it, modify it â€” no restrictions.
+<p align="center">
+  <strong>ðŸ¦† "Quack Quack, motherfeathers!" ðŸ¦†</strong><br>
+  <em>Export your Discord messages from DMs, servers, and channels.</em><br>
+  Save them as <code>.txt</code>, <code>.md</code> (Markdown), or <code>.pdf</code> files â€” with powerful search and filtering built in.
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/python-3.10%2B-blue.svg" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/status-quack%20quack-yellow.svg" alt="Status: Quack Quack">
+</p>
+
+---
+
+### ðŸ¦† The Legend of Darrel the DixporD Duck
+
+> *In the year 2094, the world was about to end. Some crazy ass nuke type stuff.*
+>
+> *See, Pete Hegseth had started storing ALL the nuclear launch codes in Discord instead of Signal. And when the time came to stop the launch... they couldn't. There was no chat log export feature. The missiles flew. The world burned.*
+>
+> *But in the ashes, they built one last thing: a time machine.*
+>
+> *And they sent back their best operative â€” their only hope â€” a cybernetic duck named **Darrel**.*
+>
+> *His mission: travel back to this very moment and create **DixporD** â€” the Discord chat exporter that does it all. Server exports, DM exports, bulk exports, cross-server search, multi-user filtering, date ranges, keyword search, .txt, .md, .pdf â€” the whole nine yards. So that the world is saved in the future.*
+>
+> *But there was a catch. If the apocalypse never happens... the time machine is never built. And if the time machine is never built... Darrel can never go home.*
+>
+> *So he found a way to digitize himself â€” to live within the internet, among the 1s and 0s, the only semblance of familiarity he could find in this cold, analogue world.*
+>
+> *And now he lives there. Helping people export their Discord files. Making sure the world is saved. For a species he's not part of. For a timeline he doesn't belong in.*
+>
+> *Because he has **integrity**, god damn it.*
+>
+> *And today? Integrity is spelled **D â€” U â€” C â€” K**.*
+>
+> *Thank you, Darrel.* ðŸ«¡
 
 ---
 
@@ -726,6 +766,8 @@ Dixpord/
 â”œâ”€â”€ .gitignore                 â† Tells Git what files to ignore
 â”œâ”€â”€ LICENSE                    â† MIT open source license
 â”œâ”€â”€ README.md                  â† This file you're reading now
+â”œâ”€â”€ banner.png                 â† Darrel the DixporD Duck â€” banner image
+â”œâ”€â”€ icon.png                   â† Darrel the DixporD Duck â€” icon image
 â”‚
 â”œâ”€â”€ dixpord/                   â† Main application code
 â”‚   â”œâ”€â”€ __init__.py            â† Package marker (ignore this)

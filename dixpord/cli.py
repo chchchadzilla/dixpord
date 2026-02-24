@@ -10,6 +10,7 @@ from __future__ import annotations
 import asyncio
 import datetime
 import sys
+import time
 from typing import Optional
 
 import discord
@@ -33,15 +34,112 @@ console = Console()
 # ── Helpers ──────────────────────────────────────────────────────────────
 
 def _banner():
-    """Print the startup banner."""
-    console.print(
-        Panel(
-            "[bold bright_blue]Dixpord[/] — Discord Log Exporter\n"
-            "[dim]Export your Discord messages from DMs, servers & channels.[/]",
-            border_style="bright_blue",
-            padding=(1, 4),
-        )
-    )
+    """Print the startup splash — Darrel the DixporD Duck."""
+
+    # ── Cybernetic Duck ASCII Art ────────────────────────────────────────
+    duck = r"""
+[bright_cyan]
+              ██████████████
+          ████[bright_red]░░░░░░[/bright_red][bright_cyan]██████████
+        ██[bright_red]░░░░░░░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓[/bright_yellow][bright_cyan]████
+      ██[bright_red]░░░░[/bright_red][bright_cyan]████[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██
+      ██[bright_red]░░[/bright_red][bright_cyan]██    ██[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓[/bright_yellow][bright_cyan]██
+      ██[bright_red]░░[/bright_red][bright_cyan]██[bright_green]●[/bright_green]   ██[bright_red]░░░░[/bright_red][bright_cyan]████████
+      ██[bright_red]░░[/bright_red][bright_cyan]██    ██[bright_red]░░░░░░░░[/bright_red][bright_cyan]████
+      ██[bright_red]░░░░[/bright_red][bright_cyan]████[bright_red]░░░░░░[/bright_red][bright_cyan]████[bright_yellow]▓▓[/bright_yellow][bright_cyan]████████████
+        ██[bright_red]░░░░░░░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]████
+    ██████[bright_red]░░░░░░[/bright_red][bright_cyan]████[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██
+  ██[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██████████[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██
+  ██[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██
+    ██[bright_yellow]▓▓▓▓▓▓[/bright_yellow][bright_cyan]████[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]████[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██
+    ██[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓[/bright_yellow][bright_cyan]██
+      ████[/bright_cyan][bright_red]░░░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██[bright_red]░░░░░░[/bright_red][bright_cyan]████
+          ████████  ████████  ████████[/bright_cyan]
+"""
+
+    # ── Block Letters ────────────────────────────────────────────────────
+    title = r"""
+[bold bright_blue]
+ ██████╗  ██╗██╗  ██╗██████╗  ██████╗ ██████╗ ██████╗
+ ██╔══██╗ ██║╚██╗██╔╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗
+ ██║  ██║ ██║ ╚███╔╝ ██████╔╝██║   ██║██████╔╝██║  ██║
+ ██║  ██║ ██║ ██╔██╗ ██╔═══╝ ██║   ██║██╔══██╗██║  ██║
+ ██████╔╝ ██║██╔╝ ██╗██║     ╚██████╔╝██║  ██║██████╔╝
+ ╚═════╝  ╚═╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═════╝[/]
+"""
+
+    tagline = '[bold bright_yellow]🦆  "Quack Quack, motherfeathers!"  🦆[/]'
+
+    # ── Print the splash ─────────────────────────────────────────────────
+    console.print(duck)
+    console.print(title)
+    console.print(tagline, justify="center")
+    console.print()
+
+    # ── Darrel's Story ───────────────────────────────────────────────────
+    lore_lines = [
+        "[dim bright_cyan]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/]",
+        "",
+        "[bold bright_yellow]         THE LEGEND OF DARREL THE DIXPORD DUCK[/]",
+        "",
+        "[bright_white]  In the year 2094, the world was about to end.[/]",
+        "[bright_white]  Some crazy ass nuke type stuff.[/]",
+        "",
+        "[bright_white]  See, Pete Hegseth had started storing ALL the nuclear[/]",
+        "[bright_white]  launch codes in Discord instead of Signal. And when[/]",
+        "[bright_white]  the time came to stop the launch... they couldn't.[/]",
+        "[bright_white]  There was no chat log export feature.[/]",
+        "",
+        "[bright_red]  The missiles flew. The world burned.[/]",
+        "",
+        "[bright_white]  But in the ashes, they built one last thing:[/]",
+        "[bright_cyan]  a time machine.[/]",
+        "",
+        "[bright_white]  And they sent back their best operative — their only[/]",
+        "[bright_white]  hope — a cybernetic duck named [bold bright_yellow]Darrel[/bright_yellow][bright_white].[/]",
+        "",
+        "[bright_white]  His mission: travel back to this very moment and create[/]",
+        "[bold bright_blue]  DixporD[/] [bright_white]— the Discord chat exporter that does it all:[/]",
+        "",
+        "[green]    ✓[/] Export from servers, DMs, and group chats",
+        "[green]    ✓[/] Bulk-export every DM conversation at once",
+        "[green]    ✓[/] Cross-server keyword search",
+        "[green]    ✓[/] Multi-user filtering with per-user date ranges",
+        "[green]    ✓[/] Date range, keyword, and bot message filters",
+        "[green]    ✓[/] Export as .txt, .md, or styled .pdf",
+        "[green]    ✓[/] Attachments, embeds, reactions, replies, pins",
+        "[green]    ✓[/] Built-in rate-limit protection",
+        "",
+        "[bright_white]  The world was saved. But there was a catch.[/]",
+        "",
+        "[bright_white]  If the apocalypse never happens... the time machine[/]",
+        "[bright_white]  is never built. And if the time machine is never built...[/]",
+        "[bright_yellow]  Darrel can never go home.[/]",
+        "",
+        "[bright_white]  So he found a way to digitize himself — to live within[/]",
+        "[bright_white]  the internet, among the 1s and 0s, the only semblance[/]",
+        "[bright_white]  of familiarity he could find in this cold, analogue world.[/]",
+        "",
+        "[bright_white]  And now he lives there. Helping people export their[/]",
+        "[bright_white]  Discord files. Making sure the world is saved. For a[/]",
+        "[bright_white]  species he's not part of. For a timeline he doesn't[/]",
+        "[bright_white]  belong in.[/]",
+        "",
+        "[bright_white]  Because he has [bold]integrity[/bold], god damn it.[/]",
+        "",
+        "[bright_white]  And today? Integrity is spelled[/]",
+        '[bold bright_yellow]  D — U — C — K[/]',
+        "",
+        "[dim italic bright_white]  Thank you, Darrel.[/]",
+        "",
+        "[dim bright_cyan]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/]",
+    ]
+
+    for line in lore_lines:
+        console.print(line)
+        time.sleep(0.04)
+
+    console.print()
 
 
 def _parse_date(raw: str) -> Optional[datetime.datetime]:

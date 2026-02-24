@@ -21,9 +21,3 @@ Thumbs.db
 
 # AI / conversation history
 .specstory/
-
-# Images (not part of the project)
-*.png
-*.jpg
-*.jpeg
-*.gif
