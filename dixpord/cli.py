@@ -35,108 +35,132 @@ console = Console()
 
 def _banner():
     """Print the startup splash — Darrel the DixporD Duck."""
+    from rich.text import Text
 
     # ── Cybernetic Duck ASCII Art ────────────────────────────────────────
-    duck = r"""
-[bright_cyan]
-              ██████████████
-          ████[bright_red]░░░░░░[/bright_red][bright_cyan]██████████
-        ██[bright_red]░░░░░░░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓[/bright_yellow][bright_cyan]████
-      ██[bright_red]░░░░[/bright_red][bright_cyan]████[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██
-      ██[bright_red]░░[/bright_red][bright_cyan]██    ██[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓[/bright_yellow][bright_cyan]██
-      ██[bright_red]░░[/bright_red][bright_cyan]██[bright_green]●[/bright_green]   ██[bright_red]░░░░[/bright_red][bright_cyan]████████
-      ██[bright_red]░░[/bright_red][bright_cyan]██    ██[bright_red]░░░░░░░░[/bright_red][bright_cyan]████
-      ██[bright_red]░░░░[/bright_red][bright_cyan]████[bright_red]░░░░░░[/bright_red][bright_cyan]████[bright_yellow]▓▓[/bright_yellow][bright_cyan]████████████
-        ██[bright_red]░░░░░░░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]████
-    ██████[bright_red]░░░░░░[/bright_red][bright_cyan]████[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██
-  ██[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██████████[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██
-  ██[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██
-    ██[bright_yellow]▓▓▓▓▓▓[/bright_yellow][bright_cyan]████[bright_yellow]▓▓▓▓▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]████[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██
-    ██[bright_yellow]▓▓▓▓[/bright_yellow][bright_cyan]██[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██[bright_red]░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓[/bright_yellow][bright_cyan]██
-      ████[/bright_cyan][bright_red]░░░░░░[/bright_red][bright_cyan]██[bright_yellow]▓▓▓▓▓▓▓▓[/bright_yellow][bright_cyan]██[bright_red]░░░░░░[/bright_red][bright_cyan]████
-          ████████  ████████  ████████[/bright_cyan]
-"""
+    # Built with Rich Text objects to avoid markup nesting issues.
+    C = "bright_cyan"
+    R = "bright_red"
+    Y = "bright_yellow"
+    G = "bright_green"
+
+    def _duck_line(*segments):
+        """Build a single line from (text, style) pairs."""
+        t = Text()
+        for text, style in segments:
+            t.append(text, style=style)
+        return t
+
+    duck_lines = [
+        _duck_line(("              ", ""), ("██████████████", C)),
+        _duck_line(("          ", ""), ("████", C), ("░░░░░░", R), ("██████████", C)),
+        _duck_line(("        ", ""), ("██", C), ("░░░░░░░░░░", R), ("██", C), ("▓▓", Y), ("████", C)),
+        _duck_line(("      ", ""), ("██", C), ("░░░░", R), ("████", C), ("░░░░", R), ("██", C), ("▓▓▓▓", Y), ("██", C)),
+        _duck_line(("      ", ""), ("██", C), ("░░", R), ("██    ██", C), ("░░░░", R), ("██", C), ("▓▓", Y), ("██", C)),
+        _duck_line(("      ", ""), ("██", C), ("░░", R), ("██", C), ("●", G), ("   ██", C), ("░░░░", R), ("████████", C)),
+        _duck_line(("      ", ""), ("██", C), ("░░", R), ("██    ██", C), ("░░░░░░░░", R), ("████", C)),
+        _duck_line(("      ", ""), ("██", C), ("░░░░", R), ("████", C), ("░░░░░░", R), ("████", C), ("▓▓", Y), ("████████████", C)),
+        _duck_line(("        ", ""), ("██", C), ("░░░░░░░░░░", R), ("██", C), ("▓▓▓▓▓▓▓▓▓▓▓▓▓▓", Y), ("████", C)),
+        _duck_line(("    ", ""), ("██████", C), ("░░░░░░", R), ("████", C), ("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓", Y), ("██", C)),
+        _duck_line(("  ", ""), ("██", C), ("▓▓▓▓", Y), ("██████████", C), ("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓", Y), ("██", C)),
+        _duck_line(("  ", ""), ("██", C), ("▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓", Y), ("██", C)),
+        _duck_line(("    ", ""), ("██", C), ("▓▓▓▓▓▓", Y), ("████", C), ("▓▓▓▓▓▓▓▓▓▓▓▓", Y), ("████", C), ("▓▓▓▓", Y), ("██", C)),
+        _duck_line(("    ", ""), ("██", C), ("▓▓▓▓", Y), ("██", C), ("░░░░", R), ("██", C), ("▓▓▓▓▓▓▓▓", Y), ("██", C), ("░░░░", R), ("██", C), ("▓▓", Y), ("██", C)),
+        _duck_line(("      ", ""), ("████", C), ("░░░░░░", R), ("██", C), ("▓▓▓▓▓▓▓▓", Y), ("██", C), ("░░░░░░", R), ("████", C)),
+        _duck_line(("          ", ""), ("████████  ████████  ████████", C)),
+    ]
+
+    console.print()
+    for dl in duck_lines:
+        console.print(dl)
 
     # ── Block Letters ────────────────────────────────────────────────────
-    title = r"""
-[bold bright_blue]
- ██████╗  ██╗██╗  ██╗██████╗  ██████╗ ██████╗ ██████╗
- ██╔══██╗ ██║╚██╗██╔╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗
- ██║  ██║ ██║ ╚███╔╝ ██████╔╝██║   ██║██████╔╝██║  ██║
- ██║  ██║ ██║ ██╔██╗ ██╔═══╝ ██║   ██║██╔══██╗██║  ██║
- ██████╔╝ ██║██╔╝ ██╗██║     ╚██████╔╝██║  ██║██████╔╝
- ╚═════╝  ╚═╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═════╝[/]
-"""
+    title_lines = [
+        "",
+        " ██████╗  ██╗██╗  ██╗██████╗  ██████╗ ██████╗ ██████╗ ",
+        " ██╔══██╗ ██║╚██╗██╔╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗",
+        " ██║  ██║ ██║ ╚███╔╝ ██████╔╝██║   ██║██████╔╝██║  ██║",
+        " ██║  ██║ ██║ ██╔██╗ ██╔═══╝ ██║   ██║██╔══██╗██║  ██║",
+        " ██████╔╝ ██║██╔╝ ██╗██║     ╚██████╔╝██║  ██║██████╔╝",
+        " ╚═════╝  ╚═╝╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═════╝ ",
+        "",
+    ]
+    for tl in title_lines:
+        console.print(tl, style="bold bright_blue")
 
-    tagline = '[bold bright_yellow]🦆  "Quack Quack, motherfeathers!"  🦆[/]'
-
-    # ── Print the splash ─────────────────────────────────────────────────
-    console.print(duck)
-    console.print(title)
-    console.print(tagline, justify="center")
+    console.print(
+        '  "Quack Quack, motherfeathers!"  ',
+        style="bold bright_yellow",
+        justify="center",
+    )
     console.print()
 
     # ── Darrel's Story ───────────────────────────────────────────────────
-    lore_lines = [
-        "[dim bright_cyan]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/]",
+    # Each tuple is (text, style). Plain strings use default style.
+    lore: list[tuple[str, str] | str] = [
+        ("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim bright_cyan"),
         "",
-        "[bold bright_yellow]         THE LEGEND OF DARREL THE DIXPORD DUCK[/]",
+        ("         THE LEGEND OF DARREL THE DIXPORD DUCK", "bold bright_yellow"),
         "",
-        "[bright_white]  In the year 2094, the world was about to end.[/]",
-        "[bright_white]  Some crazy ass nuke type stuff.[/]",
+        ("  In the year 2094, the world was about to end.", "bright_white"),
+        ("  Some crazy ass nuke type stuff.", "bright_white"),
         "",
-        "[bright_white]  See, Pete Hegseth had started storing ALL the nuclear[/]",
-        "[bright_white]  launch codes in Discord instead of Signal. And when[/]",
-        "[bright_white]  the time came to stop the launch... they couldn't.[/]",
-        "[bright_white]  There was no chat log export feature.[/]",
+        ("  See, Pete Hegseth had started storing ALL the nuclear", "bright_white"),
+        ("  launch codes in Discord instead of Signal. And when", "bright_white"),
+        ("  the time came to stop the launch... they couldn't.", "bright_white"),
+        ("  There was no chat log export feature.", "bright_white"),
         "",
-        "[bright_red]  The missiles flew. The world burned.[/]",
+        ("  The missiles flew. The world burned.", "bright_red"),
         "",
-        "[bright_white]  But in the ashes, they built one last thing:[/]",
-        "[bright_cyan]  a time machine.[/]",
+        ("  But in the ashes, they built one last thing:", "bright_white"),
+        ("  a time machine.", "bright_cyan"),
         "",
-        "[bright_white]  And they sent back their best operative — their only[/]",
-        "[bright_white]  hope — a cybernetic duck named [bold bright_yellow]Darrel[/bright_yellow][bright_white].[/]",
+        ("  And they sent back their best operative -- their only", "bright_white"),
+        ("  hope -- a cybernetic duck named Darrel.", "bright_white"),
         "",
-        "[bright_white]  His mission: travel back to this very moment and create[/]",
-        "[bold bright_blue]  DixporD[/] [bright_white]— the Discord chat exporter that does it all:[/]",
+        ("  His mission: travel back to this very moment and create", "bright_white"),
+        ("  DixporD -- the Discord chat exporter that does it all:", "bold bright_blue"),
         "",
-        "[green]    ✓[/] Export from servers, DMs, and group chats",
-        "[green]    ✓[/] Bulk-export every DM conversation at once",
-        "[green]    ✓[/] Cross-server keyword search",
-        "[green]    ✓[/] Multi-user filtering with per-user date ranges",
-        "[green]    ✓[/] Date range, keyword, and bot message filters",
-        "[green]    ✓[/] Export as .txt, .md, or styled .pdf",
-        "[green]    ✓[/] Attachments, embeds, reactions, replies, pins",
-        "[green]    ✓[/] Built-in rate-limit protection",
+        ("    + Export from servers, DMs, and group chats", "green"),
+        ("    + Bulk-export every DM conversation at once", "green"),
+        ("    + Cross-server keyword search", "green"),
+        ("    + Multi-user filtering with per-user date ranges", "green"),
+        ("    + Date range, keyword, and bot message filters", "green"),
+        ("    + Export as .txt, .md, or styled .pdf", "green"),
+        ("    + Attachments, embeds, reactions, replies, pins", "green"),
+        ("    + Built-in rate-limit protection", "green"),
         "",
-        "[bright_white]  The world was saved. But there was a catch.[/]",
+        ("  The world was saved. But there was a catch.", "bright_white"),
         "",
-        "[bright_white]  If the apocalypse never happens... the time machine[/]",
-        "[bright_white]  is never built. And if the time machine is never built...[/]",
-        "[bright_yellow]  Darrel can never go home.[/]",
+        ("  If the apocalypse never happens... the time machine", "bright_white"),
+        ("  is never built. And if the time machine is never built...", "bright_white"),
+        ("  Darrel can never go home.", "bright_yellow"),
         "",
-        "[bright_white]  So he found a way to digitize himself — to live within[/]",
-        "[bright_white]  the internet, among the 1s and 0s, the only semblance[/]",
-        "[bright_white]  of familiarity he could find in this cold, analogue world.[/]",
+        ("  So he found a way to digitize himself -- to live within", "bright_white"),
+        ("  the internet, among the 1s and 0s, the only semblance", "bright_white"),
+        ("  of familiarity he could find in this cold, analogue world.", "bright_white"),
         "",
-        "[bright_white]  And now he lives there. Helping people export their[/]",
-        "[bright_white]  Discord files. Making sure the world is saved. For a[/]",
-        "[bright_white]  species he's not part of. For a timeline he doesn't[/]",
-        "[bright_white]  belong in.[/]",
+        ("  And now he lives there. Helping people export their", "bright_white"),
+        ("  Discord files. Making sure the world is saved. For a", "bright_white"),
+        ("  species he's not part of. For a timeline he doesn't", "bright_white"),
+        ("  belong in.", "bright_white"),
         "",
-        "[bright_white]  Because he has [bold]integrity[/bold], god damn it.[/]",
+        ("  Because he has integrity, god damn it.", "bold bright_white"),
         "",
-        "[bright_white]  And today? Integrity is spelled[/]",
-        '[bold bright_yellow]  D — U — C — K[/]',
+        ("  And today? Integrity is spelled", "bright_white"),
+        ("  D -- U -- C -- K", "bold bright_yellow"),
         "",
-        "[dim italic bright_white]  Thank you, Darrel.[/]",
+        ("  Thank you, Darrel.", "dim italic bright_white"),
         "",
-        "[dim bright_cyan]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/]",
+        ("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "dim bright_cyan"),
     ]
 
-    for line in lore_lines:
-        console.print(line)
+    for entry in lore:
+        if isinstance(entry, str):
+            console.print(entry)
+        else:
+            text, style = entry
+            console.print(text, style=style)
         time.sleep(0.04)
 
     console.print()
